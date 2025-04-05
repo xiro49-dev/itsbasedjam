@@ -14,7 +14,8 @@ func init():
 	
 func shuffle():
 	queue.shuffle()
-	queue[0].can_attack = true
+	if len(queue) > 0:
+		queue[0].can_attack = true
 	for child in range(1, len(queue)-1):
 		if queue[child].type == Enums.EnemyTypes.Chase:
 			queue[child].can_attack = false

@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://cjq4pg7u5slxx"]
+
+[ext_resource type="Script" uid="uid://ne1ef4khvqs2" path="res://Actors/DronePlayer/drone_player.gd" id="1_npb7q"]
+[ext_resource type="Script" uid="uid://crwpsb4svk5eq" path="res://Actors/Player/camara_arm.gd" id="2_wow8g"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wow8g"]
+radius = 5.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_u3xs6"]
+
+[node name="DronePlayer" type="CharacterBody3D"]
+script = ExtResource("1_npb7q")
+air_acceleration = 8.0
+air_friction = 3.0
+
+[node name="Body" type="Marker3D" parent="."]
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Body"]
+polygon = PackedVector2Array(0, 0, -0.0176864, 0.870816, 0.940945, 0.641868, 1.64147, 0.00183666)
+mode = 1
+spin_degrees = 360.0
+spin_sides = 8
+
+[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="Body"]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
+polygon = PackedVector2Array(0, 0, -0.0180324, 0.851154, 0.940945, 0.641868, 1.64147, 0.00183666)
+mode = 1
+spin_degrees = 360.0
+spin_sides = 8
+
+[node name="TractorBeam" type="Marker3D" parent="Body"]
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="Body/TractorBeam" groups=["Player"]]
+shape = SubResource("SphereShape3D_wow8g")
+target_position = Vector3(0, -20, 0)
+
+[node name="Beam" type="SpringArm3D" parent="Body/TractorBeam"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+spring_length = 20.0
+
+[node name="Remote" type="RemoteTransform3D" parent="Body/TractorBeam/Beam"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+update_rotation = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_u3xs6")
+
+[node name="CameraPivot" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -2.5)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
+spring_length = -3.0
+script = ExtResource("2_wow8g")
+min_vert_angle = -1.0472
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D"]
+transform = Transform3D(-0.999994, -0.00350844, -0.000541334, -0.00350847, 0.953502, 0.301368, -0.000541169, 0.301368, -0.953508, 0, 0.238527, -3.00845)
+current = true

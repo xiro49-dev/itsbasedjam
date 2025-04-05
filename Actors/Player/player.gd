@@ -61,7 +61,7 @@ func _ready() -> void:
 	dodging_timer.timeout.connect(on_dodging_timer_timeout)
 	attacking_timer.timeout.connect(on_attacking_timer_timeout)
 	jumping_timer.timeout.connect(on_jumping_timer_timeout)
-	test_dialog()
+	#test_dialog()
 	
  
 func _process(delta: float) -> void:

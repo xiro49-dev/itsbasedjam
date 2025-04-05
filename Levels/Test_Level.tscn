@@ -18,28 +18,28 @@ polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Arr
 script = ExtResource("2_lujw4")
 scene = ExtResource("3_b2taf")
 position = Vector3(20, 1, 20)
-type = 1
+type = 0
 metadata/_custom_type_script = "uid://dsuu5nctyrdnr"
 
 [sub_resource type="Resource" id="Resource_06isw"]
 script = ExtResource("2_lujw4")
 scene = ExtResource("3_b2taf")
 position = Vector3(-20, 1, -20)
-type = 1
+type = 0
 metadata/_custom_type_script = "uid://dsuu5nctyrdnr"
 
 [sub_resource type="Resource" id="Resource_sderq"]
 script = ExtResource("2_lujw4")
 scene = ExtResource("3_b2taf")
 position = Vector3(-20, 1, 20)
-type = 1
+type = 0
 metadata/_custom_type_script = "uid://dsuu5nctyrdnr"
 
 [sub_resource type="Resource" id="Resource_3k0j6"]
 script = ExtResource("2_lujw4")
 scene = ExtResource("3_b2taf")
 position = Vector3(20, 1, -20)
-type = 1
+type = 0
 metadata/_custom_type_script = "uid://dsuu5nctyrdnr"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7jktm"]

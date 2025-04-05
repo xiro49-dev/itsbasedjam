@@ -7,7 +7,8 @@ var current_lvl : Level
 @onready var enemy_queue: Marker3D = $EnemyQueue
 @onready var dialog: Control = $UI/Dialog
 @export var test_music : AudioStream
-
+@export var should_spawn_enemeies = false
+@export var should_spawn_player = false
 func _ready()->void:
 	Music.play_track(test_music)
 	load_level()
@@ -27,9 +28,10 @@ func load_level():
 	current_lvl = load("res://Levels/"+ SaveLoad.progress.level_name + ".tscn").instantiate()
 	add_child(current_lvl)
 	current_lvl.change.connect(_on_change_request)
-	var player = player_scenes.get(current_lvl.player_type).instantiate()
-	add_child(player)
-	player.global_position = SaveLoad.progress.level_posistion
+	if should_spawn_player:
+		var player = player_scenes.get(current_lvl.player_type).instantiate()
+		add_child(player)
+		player.global_position = SaveLoad.progress.level_posistion
 	spawn_enemies(current_lvl.enemies)
 
 func _on_change_request(level_name:String):
@@ -44,12 +46,15 @@ func _on_change_request(level_name:String):
 	current_lvl = load("res://Levels/"+ level_name +".tscn").instantiate()
 	add_child(current_lvl)
 	current_lvl.change.connect(_on_change_request)
-	var player = player_scenes.get(current_lvl.player_type).instantiate()
-	add_child(player)
-	player.global_position = current_lvl.get_node("SpawnPoint").global_position
+	if should_spawn_player:
+		var player = player_scenes.get(current_lvl.player_type).instantiate()
+		add_child(player)
+		player.global_position = current_lvl.get_node("SpawnPoint").global_position
 	spawn_enemies(current_lvl.enemies)
 	
 func spawn_enemies(enemies: Array[EnemyRes]):
+	if not should_spawn_enemeies:
+		return
 	for enemy in enemies:
 		var _e = enemy.scene.instantiate()
 		enemy_queue.add_child(_e)

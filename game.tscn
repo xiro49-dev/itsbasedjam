@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://bawktqo4nkvvi" path="res://Actors/FPS_Player/fps_player.tscn" id="2_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://b2or0d1dqyw0l" path="res://Actors/Player/player.tscn" id="3_feb5d"]
 [ext_resource type="PackedScene" uid="uid://cvaac8xosm2o8" path="res://Lib/enemy_queue/enemy_queue.tscn" id="4_fc0e3"]
-[ext_resource type="AudioStream" uid="uid://g0g2kbj3yna1" path="res://new_scripts&&scenes/test_music.WAV" id="4_j5wjh"]
 [ext_resource type="Script" uid="uid://ceijyd6f3wqe6" path="res://new_scripts&&scenes/extra/dialog.gd" id="5_7jktm"]
+[ext_resource type="PackedScene" uid="uid://cjq4pg7u5slxx" path="res://Actors/DronePlayer/DronePlayer.tscn" id="5_vef74"]
 [ext_resource type="Script" uid="uid://hu4co2276cpo" path="res://new_scripts&&scenes/extra/wallet.gd" id="7_j5wjh"]
 [ext_resource type="Texture2D" uid="uid://uicwxeert8w3" path="res://new_scripts&&scenes/items/coin.PNG" id="8_j5wjh"]
 
@@ -24,11 +24,14 @@ player_scenes = Dictionary[int, PackedScene]({
 1: ExtResource("3_feb5d"),
 2: ExtResource("3_feb5d")
 })
-test_music = ExtResource("4_j5wjh")
+should_spawn_enemeies = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 123.163, 0)
 shadow_enabled = true
+
+[node name="DronePlayer" parent="." instance=ExtResource("5_vef74")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40.8617, 0)
 
 [node name="EnemyQueue" parent="." instance=ExtResource("4_fc0e3")]
 

@@ -70,7 +70,7 @@ func _physics_process(delta: float) -> void:
 	var player = get_tree().get_first_node_in_group("Player")
 	if handle_wait(delta):
 		return
-	if global_position.distance_to(player.global_position) <= attack_range and can_attack:
+	if player and global_position.distance_to(player.global_position) <= attack_range and can_attack:
 		attack(delta)
 	match type:
 		Enums.EnemyTypes.Random:
@@ -97,7 +97,7 @@ func pick_random_point():
 func random_walker(delta:float):
 	if not target_point:
 		pick_random_point()
-	velocity = Vector3.ZERO 
+
 	var next_nav_point = nav_agent.get_next_path_position()
 	velocity = (next_nav_point - global_transform.origin).normalized() * speed
 	rotation.y = lerp_angle(rotation.y, atan2(-velocity.x, -velocity.z), delta * ProjectSettings.get_setting("physics/3d/default_gravity"))
@@ -105,7 +105,6 @@ func random_walker(delta:float):
 	
 func chase(delta:float, player: Node3D):
 	nav_agent.set_target_position(player.global_position)
-	velocity = Vector3.ZERO 
 	var avoidance_vector = calculate_avoidance()
 	var next_nav_point = nav_agent.get_next_path_position()
 	velocity = ((next_nav_point - global_transform.origin).normalized() + avoidance_vector) * speed
