@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1u3libnhhy2b"]
+
+[ext_resource type="Script" uid="uid://d2d5p67ypv24w" path="res://UI/MainMenu/main_menu.gd" id="1_7vrkn"]
+[ext_resource type="Script" uid="uid://dt2evji8ervsa" path="res://Lib/menu.gd" id="2_r0tc5"]
+[ext_resource type="PackedScene" uid="uid://7dgtopu4cevf" path="res://UI/Settings/settings.tscn" id="3_r0tc5"]
+
+[node name="MainMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7vrkn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." node_paths=PackedStringArray("_defaul_grab_focus")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_r0tc5")
+_defaul_grab_focus = NodePath("Newgame")
+
+[node name="Newgame" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "newgame
+"
+
+[node name="Continue" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "continue"
+
+[node name="Settings" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "settings"
+
+[node name="Exit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "exit"
+
+[node name="SettingsMenu" parent="." instance=ExtResource("3_r0tc5")]
+visible = false
+layout_mode = 1

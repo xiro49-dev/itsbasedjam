@@ -1,0 +1,209 @@
+[gd_scene load_steps=4 format=3 uid="uid://7dgtopu4cevf"]
+
+[ext_resource type="Script" uid="uid://dt2evji8ervsa" path="res://Lib/menu.gd" id="1_6ukun"]
+[ext_resource type="Script" uid="uid://cclawwl1mu2jk" path="res://UI/Settings/volume.gd" id="1_jjy6o"]
+[ext_resource type="Script" uid="uid://b5t10wr706von" path="res://UI/Settings/camera.gd" id="2_u23uq"]
+
+[node name="Settings" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6ukun")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="VolumeSettings" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("1_jjy6o")
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/VolumeSettings"]
+layout_mode = 2
+text = "Volume"
+
+[node name="Master" type="HBoxContainer" parent="CenterContainer/VBoxContainer/VolumeSettings"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/VolumeSettings/Master"]
+custom_minimum_size = Vector2(118, 0)
+layout_mode = 2
+text = "Master"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/VolumeSettings/Master"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/VolumeSettings/Master/HBoxContainer"]
+layout_mode = 2
+text = "0%"
+
+[node name="HSlider" type="HSlider" parent="CenterContainer/VBoxContainer/VolumeSettings/Master/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer/VolumeSettings/Master/HBoxContainer"]
+layout_mode = 2
+text = "100%"
+
+[node name="Music" type="HBoxContainer" parent="CenterContainer/VBoxContainer/VolumeSettings"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/VolumeSettings/Music"]
+custom_minimum_size = Vector2(118, 0)
+layout_mode = 2
+text = "Music"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/VolumeSettings/Music"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/VolumeSettings/Music/HBoxContainer"]
+layout_mode = 2
+text = "0%"
+
+[node name="HSlider" type="HSlider" parent="CenterContainer/VBoxContainer/VolumeSettings/Music/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+ticks_on_borders = true
+
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer/VolumeSettings/Music/HBoxContainer"]
+layout_mode = 2
+text = "100%"
+
+[node name="SFX" type="HBoxContainer" parent="CenterContainer/VBoxContainer/VolumeSettings"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/VolumeSettings/SFX"]
+custom_minimum_size = Vector2(118, 0)
+layout_mode = 2
+text = "SFX"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/VolumeSettings/SFX"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/VolumeSettings/SFX/HBoxContainer"]
+layout_mode = 2
+text = "0%"
+
+[node name="HSlider" type="HSlider" parent="CenterContainer/VBoxContainer/VolumeSettings/SFX/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer/VolumeSettings/SFX/HBoxContainer"]
+layout_mode = 2
+text = "100%"
+
+[node name="MouseSettings" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("2_u23uq")
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/MouseSettings"]
+layout_mode = 2
+text = "Camera"
+
+[node name="Sensitivity" type="HBoxContainer" parent="CenterContainer/VBoxContainer/MouseSettings"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/MouseSettings/Sensitivity"]
+custom_minimum_size = Vector2(118, 0)
+layout_mode = 2
+text = "Sensitivity"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/MouseSettings/Sensitivity"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/MouseSettings/Sensitivity/HBoxContainer"]
+layout_mode = 2
+text = "0%"
+
+[node name="HSlider" type="HSlider" parent="CenterContainer/VBoxContainer/MouseSettings/Sensitivity/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer/MouseSettings/Sensitivity/HBoxContainer"]
+layout_mode = 2
+text = "100%"
+
+[node name="InvertX" type="HBoxContainer" parent="CenterContainer/VBoxContainer/MouseSettings"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/MouseSettings/InvertX"]
+custom_minimum_size = Vector2(118, 0)
+layout_mode = 2
+text = "Invert X"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/MouseSettings/InvertX"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/MouseSettings/InvertX/HBoxContainer"]
+layout_mode = 2
+text = "Off"
+
+[node name="CheckButton" type="CheckButton" parent="CenterContainer/VBoxContainer/MouseSettings/InvertX/HBoxContainer"]
+layout_mode = 2
+button_pressed = true
+
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer/MouseSettings/InvertX/HBoxContainer"]
+layout_mode = 2
+text = "On"
+
+[node name="InvertY" type="HBoxContainer" parent="CenterContainer/VBoxContainer/MouseSettings"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/MouseSettings/InvertY"]
+custom_minimum_size = Vector2(118, 0)
+layout_mode = 2
+text = "Invert Y"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/MouseSettings/InvertY"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/MouseSettings/InvertY/HBoxContainer"]
+layout_mode = 2
+text = "Off"
+
+[node name="CheckButton" type="CheckButton" parent="CenterContainer/VBoxContainer/MouseSettings/InvertY/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer/MouseSettings/InvertY/HBoxContainer"]
+layout_mode = 2
+text = "On"
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="CenterContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "Close
+"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/MarginContainer/Button" to="." method="close"]

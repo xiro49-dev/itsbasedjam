@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://0ormb8tburhl"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_spfjl"]
+height = 0.462372
+radius = 0.0688477
+
+[node name="item_1" type="Node3D"]
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="."]
+transform = Transform3D(-80.2809, -59.062, -8.16474, 56.1928, -79.5268, 22.7564, -19.9335, 13.681, 97.0334, 8.37057, 19.8429, 4.01016)
+radius = 0.0546875
+height = 0.476685
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-80.2809, -59.0619, -8.16475, 56.1914, -79.5268, 22.7563, -19.9332, 13.681, 97.0331, 8.52287, 20.048, 3.97488)
+shape = SubResource("CylinderShape3D_spfjl")

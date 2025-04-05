@@ -1,0 +1,132 @@
+[gd_scene load_steps=11 format=3 uid="uid://bhkh4jli8stek"]
+
+[ext_resource type="Script" uid="uid://cl1ng4ua7y0us" path="res://game.gd" id="1_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://bawktqo4nkvvi" path="res://Actors/FPS_Player/fps_player.tscn" id="2_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://b2or0d1dqyw0l" path="res://Actors/Player/player.tscn" id="3_feb5d"]
+[ext_resource type="PackedScene" uid="uid://cvaac8xosm2o8" path="res://Lib/enemy_queue/enemy_queue.tscn" id="4_fc0e3"]
+[ext_resource type="AudioStream" uid="uid://g0g2kbj3yna1" path="res://new_scripts&&scenes/test_music.WAV" id="4_j5wjh"]
+[ext_resource type="Script" uid="uid://ceijyd6f3wqe6" path="res://new_scripts&&scenes/extra/dialog.gd" id="5_7jktm"]
+[ext_resource type="Script" uid="uid://hu4co2276cpo" path="res://new_scripts&&scenes/extra/wallet.gd" id="7_j5wjh"]
+[ext_resource type="Texture2D" uid="uid://uicwxeert8w3" path="res://new_scripts&&scenes/items/coin.PNG" id="8_j5wjh"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_7jktm"]
+device = -1
+keycode = 32
+unicode = 32
+
+[sub_resource type="Shortcut" id="Shortcut_ryrav"]
+events = [SubResource("InputEventKey_7jktm")]
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_fc0e3")
+player_scenes = Dictionary[int, PackedScene]({
+0: ExtResource("2_e2o6t"),
+1: ExtResource("3_feb5d"),
+2: ExtResource("3_feb5d")
+})
+test_music = ExtResource("4_j5wjh")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 123.163, 0)
+shadow_enabled = true
+
+[node name="EnemyQueue" parent="." instance=ExtResource("4_fc0e3")]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Dialog" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_7jktm")
+
+[node name="continue" type="Button" parent="UI/Dialog"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.918
+anchor_top = 0.819
+anchor_right = 0.98
+anchor_bottom = 0.873
+offset_left = -0.536011
+offset_top = 0.287964
+offset_right = 0.0400391
+offset_bottom = 0.295959
+grow_horizontal = 0
+grow_vertical = 2
+shortcut = SubResource("Shortcut_ryrav")
+text = "space"
+
+[node name="Panel" type="Panel" parent="UI/Dialog"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.091
+anchor_top = 0.764
+anchor_right = 0.916
+anchor_bottom = 0.94
+offset_left = 0.167992
+offset_top = -0.072052
+offset_right = -0.232056
+offset_bottom = -0.120056
+
+[node name="VBoxContainer" type="HBoxContainer" parent="UI/Dialog/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Dialog/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Speaker" type="Label" parent="UI/Dialog/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Dialouge" type="RichTextLabel" parent="UI/Dialog/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="options" type="VBoxContainer" parent="UI/Dialog/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="option 1" type="Button" parent="UI/Dialog/Panel/VBoxContainer/options"]
+layout_mode = 2
+
+[node name="option 2" type="Button" parent="UI/Dialog/Panel/VBoxContainer/options"]
+layout_mode = 2
+
+[node name="option 3" type="Button" parent="UI/Dialog/Panel/VBoxContainer/options"]
+layout_mode = 2
+
+[node name="Wallet" type="HBoxContainer" parent="UI"]
+offset_top = -46.44
+offset_right = 86.0
+offset_bottom = -1.44
+script = ExtResource("7_j5wjh")
+_on_screen_position = Vector2(32, 32)
+_off_screen_position = Vector2(32, -46)
+
+[node name="icon" type="TextureRect" parent="UI/Wallet"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+texture = ExtResource("8_j5wjh")
+expand_mode = 3
+
+[node name="counter" type="Label" parent="UI/Wallet"]
+layout_mode = 2
+text = "9999"
+
+[node name="auto_hide" type="Timer" parent="UI/Wallet"]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="pressed" from="UI/Dialog/Panel/VBoxContainer/options/option 1" to="UI/Dialog" method="on_option_pressed" binds= [0]]
+[connection signal="pressed" from="UI/Dialog/Panel/VBoxContainer/options/option 2" to="UI/Dialog" method="on_option_pressed" binds= [1]]
+[connection signal="pressed" from="UI/Dialog/Panel/VBoxContainer/options/option 3" to="UI/Dialog" method="on_option_pressed" binds= [2]]

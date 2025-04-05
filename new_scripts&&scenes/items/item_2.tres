@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://6g0qw0lmh3jq"]
+
+[ext_resource type="Script" uid="uid://cmmrsrmtjya0e" path="res://new_scripts&&scenes/items/item.gd" id="1_tyyib"]
+[ext_resource type="Texture2D" uid="uid://jlp3tyur0lw2" path="res://new_scripts&&scenes/items/item_icon.PNG" id="1_y3ihm"]
+
+[resource]
+script = ExtResource("1_tyyib")
+name = "item_2"
+type = 0
+description = ""
+value = 1
+icon = ExtResource("1_y3ihm")
+scene = "res://new_scripts&&scenes/items/item_2_scene.tscn"
+metadata/_custom_type_script = "uid://cmmrsrmtjya0e"

@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://6pdul7414kcf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a8wwb"]
+size = Vector3(40, 15.2104, 40)
+
+[node name="item_2" type="Node3D"]
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="."]
+transform = Transform3D(0.584768, -0.753353, -0.300841, 0.804356, 0.586561, 0.0946463, 0.10516, -0.297329, 0.948966, 7.93518, 18.8439, 6.56692)
+outer_radius = 18.9694
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.584768, -0.753354, -0.300841, 0.804356, 0.586562, 0.0946463, 0.10516, -0.29733, 0.948966, 7.54956, 19.1442, 6.41472)
+shape = SubResource("BoxShape3D_a8wwb")

@@ -1,0 +1,44 @@
+[gd_resource type="AnimationNodeStateMachine" load_steps=10 format=3 uid="uid://bvw5kpbhwhwth"]
+
+[ext_resource type="AnimationNodeBlendTree" uid="uid://c4j5q2d5kvgt6" path="res://new_scripts&&scenes/animation_tree/NodeBlendTree.tres" id="1_m5ej0"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_18j03"]
+animation = &"A_die"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mtqw2"]
+animation = &"A_hit"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dqfgl"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bgthb"]
+xfade_time = 0.25
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ufj14"]
+xfade_time = 0.25
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_rrgqv"]
+states/A_hit/node = SubResource("AnimationNodeAnimation_mtqw2")
+states/A_hit/position = Vector2(476, -7)
+states/BlendTree/node = ExtResource("1_m5ej0")
+states/BlendTree/position = Vector2(495, 164)
+states/Start/position = Vector2(199, 126)
+transitions = ["Start", "BlendTree", SubResource("AnimationNodeStateMachineTransition_dqfgl"), "BlendTree", "A_hit", SubResource("AnimationNodeStateMachineTransition_bgthb"), "A_hit", "BlendTree", SubResource("AnimationNodeStateMachineTransition_ufj14")]
+graph_offset = Vector2(77, -22)
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fgopj"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lcw6o"]
+xfade_time = 0.25
+
+[resource]
+states/A_die/node = SubResource("AnimationNodeAnimation_18j03")
+states/A_die/position = Vector2(531, 3)
+states/Hit/node = SubResource("AnimationNodeStateMachine_rrgqv")
+states/Hit/position = Vector2(531, 140)
+states/Start/position = Vector2(224, 140)
+transitions = ["Start", "Hit", SubResource("AnimationNodeStateMachineTransition_fgopj"), "Hit", "A_die", SubResource("AnimationNodeStateMachineTransition_lcw6o")]
+graph_offset = Vector2(90, -33)

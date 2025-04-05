@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://lvpi2mwnllsi"]
+
+[ext_resource type="Script" uid="uid://bvp7fnwcy5eiv" path="res://new_scripts&&scenes/items/item_trigger.gd" id="1_sv8vj"]
+[ext_resource type="Resource" uid="uid://br62lqkmeudw1" path="res://new_scripts&&scenes/items/item_1.tres" id="2_c0dga"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lujw4"]
+size = Vector3(0.830445, 1.97998, 0.598281)
+
+[node name="item_trigger" type="Area3D"]
+collision_layer = 64
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_sv8vj")
+resource = ExtResource("2_c0dga")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.118224, -0.806199, -0.172692)
+shape = SubResource("BoxShape3D_lujw4")
+
+[node name="Label3D" type="Label3D" parent="."]
+visible = false
+billboard = 1
+text = "Press E"
