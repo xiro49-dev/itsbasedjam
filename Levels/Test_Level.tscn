@@ -58,11 +58,10 @@ albedo_texture = ExtResource("3_ethlp")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vef74"]
 albedo_texture = ExtResource("3_ethlp")
 
-[node name="Test-Level" type="NavigationRegion3D"]
+[node name="Test-Level" type="NavigationRegion3D" groups=["Level"]]
 navigation_mesh = SubResource("NavigationMesh_koob3")
 script = ExtResource("1_a4bbc")
 level_name = "Test_Level"
-player_type = 1
 enemies = Array[ExtResource("2_lujw4")]([SubResource("Resource_vctyh"), SubResource("Resource_06isw"), SubResource("Resource_sderq"), SubResource("Resource_3k0j6")])
 
 [node name="SpawnPoint" type="Marker3D" parent="."]
@@ -107,7 +106,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -30.6961)
 
 [node name="LevelPortal" parent="." instance=ExtResource("5_ethlp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 26.4149)
-target_level = "test_level_2"
+target_level = "test_level_3"
+
+[node name="BasePlant" parent="." instance=ExtResource("10_06isw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.1296, 1.34091, 0)
 
 [node name="items_pickup" type="Node" parent="."]
 
@@ -124,9 +126,6 @@ resource = ExtResource("9_vctyh")
 
 [node name="CSGTorus3D" type="CSGTorus3D" parent="items_pickup/item_trigger2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.146692, -1.89592, -0.434119)
-
-[node name="BasePlant" parent="." instance=ExtResource("10_06isw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.34091, 0)
 
 [editable path="items_pickup/item_trigger"]
 [editable path="items_pickup/item_trigger2"]

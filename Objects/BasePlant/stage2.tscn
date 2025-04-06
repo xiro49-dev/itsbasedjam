@@ -1,5 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://h0n7gxvejhhg"]
+[gd_scene format=3 uid="uid://h0n7gxvejhhg"]
 
-[ext_resource type="PackedScene" uid="uid://kc3qsgdv47sb" path="res://Assets/plants/Fbx/Desert_plant_002.fbx" id="1_cfy10"]
+[node name="Desert_plant_002" type="Node3D"]
 
-[node name="Desert_plant_002" instance=ExtResource("1_cfy10")]
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.744739, -0.290527, -0.222717)
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.741242, -0.290527, -0.222717)
+size = Vector3(0.5, 0.5, 0.5)

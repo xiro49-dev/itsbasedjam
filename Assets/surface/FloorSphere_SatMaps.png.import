@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://b6o3unwne6mwg"
+path.s3tc="res://.godot/imported/FloorSphere_SatMaps.png-0d3d339e0e5f77b38efdc9acf2fd6cb3.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "bf15815a6ca93e05ab68862849d7ff62"
+}
+
+[deps]
+
+source_file="res://Assets/surface/FloorSphere_SatMaps.png"
+dest_files=["res://.godot/imported/FloorSphere_SatMaps.png-0d3d339e0e5f77b38efdc9acf2fd6cb3.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

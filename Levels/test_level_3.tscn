@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpi0qe565eetu"]
+
+[ext_resource type="Script" uid="uid://ct8wm256wp28x" path="res://Levels/level.gd" id="1_qxhd6"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_i686t"]
+radius = 100.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qxhd6"]
+radius = 150.0
+
+[node name="TestLevel3" type="NavigationRegion3D"]
+script = ExtResource("1_qxhd6")
+level_name = "test_level_3"
+metadata/_custom_type_script = "uid://ct8wm256wp28x"
+
+[node name="SpawnPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 102.12, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." groups=["Planet"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("SphereShape3D_i686t")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="StaticBody3D"]
+radius = 100.0
+radial_segments = 30
+rings = 30
+
+[node name="Area3D" type="Area3D" parent="StaticBody3D"]
+gravity_space_override = 3
+gravity_point_center = Vector3(0, 0, 0)
+gravity_direction = Vector3(0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/Area3D"]
+shape = SubResource("SphereShape3D_qxhd6")

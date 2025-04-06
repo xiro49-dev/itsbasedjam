@@ -1,0 +1,107 @@
+[gd_scene load_steps=10 format=3 uid="uid://c3mv2dav7yk14"]
+
+[ext_resource type="Script" uid="uid://ct8wm256wp28x" path="res://Levels/level.gd" id="1_m82c1"]
+[ext_resource type="PackedScene" uid="uid://c47le5aq4q1v5" path="res://Levels/Checkpoint/check_point.tscn" id="2_n7m4t"]
+[ext_resource type="PackedScene" uid="uid://bp2qtyg3h2pg" path="res://Levels/LevelPortal/level_portal.tscn" id="3_ry70x"]
+[ext_resource type="Texture2D" uid="uid://mj5lqv6dnxrw" path="res://Assets/Textures/kenney_prototype-textures/Vector/texture_02.svg" id="4_yo00w"]
+[ext_resource type="PackedScene" uid="uid://dqpxfiud84k3y" path="res://Objects/BasePlant/base_plant.tscn" id="5_n7m4t"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_n7m4t"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rxn5u"]
+albedo_texture = ExtResource("4_yo00w")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rsxda"]
+albedo_texture = ExtResource("4_yo00w")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n7m4t"]
+
+[node name="DroneTestLevel" type="NavigationRegion3D"]
+navigation_mesh = SubResource("NavigationMesh_n7m4t")
+script = ExtResource("1_m82c1")
+level_name = "drone_test_level"
+player_type = 1
+metadata/_custom_type_script = "uid://ct8wm256wp28x"
+
+[node name="SpawnPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26.1489, 22.9411)
+
+[node name="CheckPoint" parent="." instance=ExtResource("2_n7m4t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 37.8044)
+
+[node name="LevelPortal" parent="." instance=ExtResource("3_ry70x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -39.5859)
+target_level = "Test_Level"
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.983, 25, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.18158, 0, 0)
+use_collision = true
+size = Vector3(100, 50, 100)
+material = SubResource("StandardMaterial3D_rxn5u")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.04077, 0.674805, 0)
+operation = 2
+use_collision = true
+size = Vector3(96.9185, 50.3496, 99)
+material = SubResource("StandardMaterial3D_rsxda")
+
+[node name="Objects" type="Node" parent="."]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.41284, 0)
+collision_layer = 3
+can_sleep = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/RigidBody3D"]
+shape = SubResource("BoxShape3D_n7m4t")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Objects/RigidBody3D"]
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.08704, 1.41284, -10.5042)
+collision_layer = 3
+can_sleep = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/RigidBody3D2"]
+shape = SubResource("BoxShape3D_n7m4t")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Objects/RigidBody3D2"]
+
+[node name="RigidBody3D4" type="RigidBody3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.19437, 1.41284, -10.5042)
+collision_layer = 3
+can_sleep = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/RigidBody3D4"]
+shape = SubResource("BoxShape3D_n7m4t")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Objects/RigidBody3D4"]
+
+[node name="RigidBody3D5" type="RigidBody3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.41284, -5.68618)
+collision_layer = 3
+can_sleep = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/RigidBody3D5"]
+shape = SubResource("BoxShape3D_n7m4t")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Objects/RigidBody3D5"]
+
+[node name="RigidBody3D3" type="RigidBody3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.41284, -20.3718)
+collision_layer = 3
+can_sleep = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/RigidBody3D3"]
+shape = SubResource("BoxShape3D_n7m4t")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Objects/RigidBody3D3"]
+
+[node name="BasePlant" parent="." groups=["Level"] instance=ExtResource("5_n7m4t")]

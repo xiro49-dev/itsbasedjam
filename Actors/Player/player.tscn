@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://b2or0d1dqyw0l"]
+[gd_scene load_steps=12 format=3 uid="uid://b2or0d1dqyw0l"]
 
 [ext_resource type="Script" uid="uid://dcxlf2cd5k5q6" path="res://Actors/Player/player.gd" id="1_5ni5v"]
 [ext_resource type="Script" uid="uid://crwpsb4svk5eq" path="res://Actors/Player/camara_arm.gd" id="1_vhr1b"]
+[ext_resource type="PackedScene" uid="uid://cjq4pg7u5slxx" path="res://Actors/DronePlayer/DronePlayer.tscn" id="2_pnakb"]
 [ext_resource type="PackedScene" uid="uid://co47sqq6q74rq" path="res://Assets/male_base.tscn" id="3_8gtf5"]
 [ext_resource type="Script" uid="uid://cyhxk36ccqils" path="res://new_scripts&&scenes/extra/pickup_items.gd" id="8_awv0x"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://bvw5kpbhwhwth" path="res://new_scripts&&scenes/animation_tree/Root.tres" id="18_rbp5l"]
@@ -18,16 +19,19 @@ radius = 2.0
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 collision_layer = 4
 script = ExtResource("1_5ni5v")
+drone = ExtResource("2_pnakb")
 
-[node name="CameraPivot" type="Marker3D" parent="."]
+[node name="CameraPivotPivot" type="Marker3D" parent="."]
+
+[node name="CameraPivot" type="Marker3D" parent="CameraPivotPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 
-[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivotPivot/CameraPivot"]
 spring_length = -3.0
 script = ExtResource("1_vhr1b")
 min_vert_angle = -1.0472
 
-[node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D"]
+[node name="Camera3D" type="Camera3D" parent="CameraPivotPivot/CameraPivot/SpringArm3D"]
 transform = Transform3D(-0.999994, -0.00350844, -0.000541334, -0.00350847, 0.953502, 0.301368, -0.000541169, 0.301368, -0.953508, 0, 0.238527, -3.00845)
 current = true
 
@@ -154,6 +158,10 @@ bones/63/position = Vector3(1.92444e-06, 16.7587, 1.2878e-06)
 bones/63/rotation = Quaternion(0.300329, 0.0409958, -0.0137366, 0.952855)
 bones/64/position = Vector3(-5.97909e-07, 6.45107, 5.58786e-08)
 
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Body"]
+remote_path = NodePath("../../Item_picker/RayCast3D")
+use_global_coordinates = false
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00217, 0)
 shape = SubResource("CapsuleShape3D_b63gh")
@@ -222,7 +230,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_8gtf5")
 
 [node name="RayCast3D" type="RayCast3D" parent="Item_picker"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.57048, 0)
 collision_mask = 65
 collide_with_areas = true
 

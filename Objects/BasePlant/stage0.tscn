@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://voyg8d32f3dw"]
+
+[node name="Desert_plant_003" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
