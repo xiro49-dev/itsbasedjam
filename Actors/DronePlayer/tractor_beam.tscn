@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://crw82nlnrhcg1"]
+
+[ext_resource type="Script" uid="uid://exqa8fh7nycf" path="res://Actors/DronePlayer/beam.gd" id="1_r5nq7"]
+
+[node name="TractorBeam" type="Marker3D"]
+
+[node name="BeamCast" type="RayCast3D" parent="."]
+target_position = Vector3(0, -100, 0)
+collision_mask = 2
+
+[node name="Beam" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+spring_length = 10.0
+script = ExtResource("1_r5nq7")
+
+[node name="Remote" type="RemoteTransform3D" parent="Beam"]
+update_rotation = false

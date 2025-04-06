@@ -1,15 +1,13 @@
 extends Node
 
 enum PlayerTypes {
-	Fps,
 	ThirdPerson,
-	Realistic,
+	Drone,
 }
  
 enum EnemyTypes {
 	Random,
-	Chase,
-	Follow
+	Chase
 }
 
 enum EquipmentType

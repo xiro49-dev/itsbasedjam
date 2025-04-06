@@ -32,7 +32,7 @@ func _ready() -> void:
 func _process(delta):
 	if Input.is_action_just_pressed("click"):
 		if held_object:
-			(held_object as Node).process_mode = Node.PROCESS_MODE_INHERIT
+			(held_object as Node).process_mode = Node.PROCESS_MODE_DISABLED
 		remote.remote_path = NodePath("")
 		
 	if beam_ray.is_colliding():

@@ -3,7 +3,7 @@ extends SpringArm3D
 @export_range(-90.0, 0.0, 0.1, "radians_as_degrees") var min_vert_angle = -PI/2
 @export_range(0.0, 90.0, 0.1, "radians_as_degrees") var max_vert_angle = PI/4
 @onready var camera_pivot: Marker3D = $".."
-
+@onready var camera_pivot_pivot: Marker3D = $"../.."
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	if SaveLoad.settings:
@@ -12,9 +12,9 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED :
 		if SaveLoad.settings.camera_invert_x:
-			camera_pivot.rotation.y += event.relative.x * mouse_sen
+			camera_pivot_pivot.rotation.y += event.relative.x * mouse_sen
 		else:
-			camera_pivot.rotation.y -= event.relative.x * mouse_sen
+			camera_pivot_pivot.rotation.y -= event.relative.x * mouse_sen
 			
 		if SaveLoad.settings.camera_invert_y:
 			camera_pivot.rotation.x += -event.relative.y * mouse_sen
