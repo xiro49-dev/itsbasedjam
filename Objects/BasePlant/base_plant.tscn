@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqpxfiud84k3y"]
+
+[ext_resource type="Script" uid="uid://cskiaq1mmabfy" path="res://Objects/BasePlant/base_plant.gd" id="1_l8lqb"]
+[ext_resource type="PackedScene" uid="uid://do14qmxd1wgui" path="res://Objects/BasePlant/stage1.tscn" id="2_f8kdk"]
+[ext_resource type="PackedScene" uid="uid://h0n7gxvejhhg" path="res://Objects/BasePlant/stage2.tscn" id="3_whuxo"]
+
+[node name="BasePlant" type="Area3D"]
+script = ExtResource("1_l8lqb")
+stages = Array[PackedScene]([ExtResource("2_f8kdk"), ExtResource("3_whuxo")])
+
+[node name="Body" type="Marker3D" parent="."]
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.035
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

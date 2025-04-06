@@ -77,8 +77,6 @@ func _physics_process(delta: float) -> void:
 			random_walker(delta)
 		Enums.EnemyTypes.Chase:
 			chase(delta, get_tree().get_first_node_in_group("Player"))
-		Enums.EnemyTypes.Follow:
-			pass
 	animation_tree.set("parameters/Hit/BlendTree/Locomotion/movement/blend_position", velocity.length() / speed * 2) 
 	handle_filters(velocity != Vector3.ZERO)
 	 
