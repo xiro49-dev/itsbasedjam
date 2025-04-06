@@ -23,10 +23,6 @@ Enums="*res://Global/enums.gd"
 SignalManager="*res://Global/SignalManager.gd"
 Music="*res://Global/Music.gd"
 
-[display]
-
-window/size/mode=3
-
 [editor]
 
 movie_writer/movie_file="/var/home/tod/itsbasedjam (2)/movie_file.avi"
@@ -35,6 +31,7 @@ movie_writer/movie_file="/var/home/tod/itsbasedjam (2)/movie_file.avi"
 
 Player=""
 ai="ai nav agents"
+Level=""
 
 [input]
 

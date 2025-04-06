@@ -1,6 +1,7 @@
 extends Area3D
 
 @export var resource: Item
+
 @onready var label_3d: Label3D = $Label3D
 
 func _ready() -> void:

@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://bhkh4jli8stek"]
+[gd_scene load_steps=10 format=3 uid="uid://bhkh4jli8stek"]
 
 [ext_resource type="Script" uid="uid://cl1ng4ua7y0us" path="res://game.gd" id="1_fc0e3"]
-[ext_resource type="PackedScene" uid="uid://bawktqo4nkvvi" path="res://Actors/FPS_Player/fps_player.tscn" id="2_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://b2or0d1dqyw0l" path="res://Actors/Player/player.tscn" id="3_feb5d"]
 [ext_resource type="PackedScene" uid="uid://cvaac8xosm2o8" path="res://Lib/enemy_queue/enemy_queue.tscn" id="4_fc0e3"]
 [ext_resource type="Script" uid="uid://ceijyd6f3wqe6" path="res://new_scripts&&scenes/extra/dialog.gd" id="5_7jktm"]
@@ -20,19 +19,16 @@ events = [SubResource("InputEventKey_7jktm")]
 [node name="Game" type="Node3D"]
 script = ExtResource("1_fc0e3")
 player_scenes = Dictionary[int, PackedScene]({
-0: ExtResource("2_e2o6t"),
-1: ExtResource("3_feb5d"),
-2: ExtResource("3_feb5d")
+0: ExtResource("3_feb5d"),
+1: ExtResource("5_vef74")
 })
+should_spawn_player = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 123.163, 0)
 shadow_enabled = true
 
 [node name="EnemyQueue" parent="." instance=ExtResource("4_fc0e3")]
-
-[node name="DronePlayer" parent="." instance=ExtResource("5_vef74")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 42.8199, 0)
 
 [node name="UI" type="CanvasLayer" parent="."]
 

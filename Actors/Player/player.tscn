@@ -19,15 +19,17 @@ radius = 2.0
 collision_layer = 4
 script = ExtResource("1_5ni5v")
 
-[node name="CameraPivot" type="Marker3D" parent="."]
+[node name="CameraPivotPivot" type="Marker3D" parent="."]
+
+[node name="CameraPivot" type="Marker3D" parent="CameraPivotPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 
-[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivotPivot/CameraPivot"]
 spring_length = -3.0
 script = ExtResource("1_vhr1b")
 min_vert_angle = -1.0472
 
-[node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D"]
+[node name="Camera3D" type="Camera3D" parent="CameraPivotPivot/CameraPivot/SpringArm3D"]
 transform = Transform3D(-0.999994, -0.00350844, -0.000541334, -0.00350847, 0.953502, 0.301368, -0.000541169, 0.301368, -0.953508, 0, 0.238527, -3.00845)
 current = true
 

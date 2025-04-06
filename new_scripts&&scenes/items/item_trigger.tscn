@@ -14,7 +14,6 @@ script = ExtResource("1_sv8vj")
 resource = ExtResource("2_c0dga")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.118224, -0.806199, -0.172692)
 shape = SubResource("BoxShape3D_lujw4")
 
 [node name="Label3D" type="Label3D" parent="."]

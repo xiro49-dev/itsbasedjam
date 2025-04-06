@@ -14,7 +14,7 @@ var is_retracting: bool = false
 @onready var remote: RemoteTransform3D = $TractorBeam/Beam/Remote
 var camera_transform_basis = Basis() # Store the initial camera basis
 
-@onready var camera_pivot = $CameraPivot # Node to handle vertical (pitch) rotation
+@onready var camera_pivot = $CameraPivotPivot/CameraPivot # Node to handle vertical (pitch) rotation
 @onready var camera = $CameraPivotPivot/CameraPivot/SpringArm3D/Camera3D
 
 func _ready():
