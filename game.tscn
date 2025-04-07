@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bhkh4jli8stek"]
+[gd_scene load_steps=11 format=3 uid="uid://bhkh4jli8stek"]
 
 [ext_resource type="Script" uid="uid://cl1ng4ua7y0us" path="res://game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://b2or0d1dqyw0l" path="res://Actors/Player/player.tscn" id="3_feb5d"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cjq4pg7u5slxx" path="res://Actors/DronePlayer/DronePlayer.tscn" id="5_vef74"]
 [ext_resource type="Script" uid="uid://hu4co2276cpo" path="res://new_scripts&&scenes/extra/wallet.gd" id="7_j5wjh"]
 [ext_resource type="Texture2D" uid="uid://uicwxeert8w3" path="res://new_scripts&&scenes/items/coin.PNG" id="8_j5wjh"]
+[ext_resource type="PackedScene" uid="uid://dfm53ed3e7jty" path="res://UI/PauseMenu/pause_menu.tscn" id="8_vef74"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_7jktm"]
 device = -1
@@ -124,6 +125,9 @@ text = "9999"
 [node name="auto_hide" type="Timer" parent="UI/Wallet"]
 wait_time = 3.0
 one_shot = true
+
+[node name="PauseMenu" parent="UI" instance=ExtResource("8_vef74")]
+process_mode = 3
 
 [connection signal="pressed" from="UI/Dialog/Panel/VBoxContainer/options/option 1" to="UI/Dialog" method="on_option_pressed" binds= [0]]
 [connection signal="pressed" from="UI/Dialog/Panel/VBoxContainer/options/option 2" to="UI/Dialog" method="on_option_pressed" binds= [1]]

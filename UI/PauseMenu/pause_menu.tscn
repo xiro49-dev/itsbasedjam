@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://dfm53ed3e7jty"]
 
 [ext_resource type="Script" uid="uid://viqlpa60app5" path="res://UI/PauseMenu/pause_menu.gd" id="1_23tdg"]
 
@@ -11,13 +11,32 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_23tdg")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Restart" type="Button" parent="CenterContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer"]
 layout_mode = 2
 
-[node name="Exit" type="Button" parent="CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer"]
 layout_mode = 2
+
+[node name="Resume" type="Button" parent="PanelContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="LoadLastCheckpoint" type="Button" parent="PanelContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Load Last Checkpoint"
+
+[node name="Quit" type="Button" parent="PanelContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Exit to Desktop"
+
+[connection signal="pressed" from="PanelContainer/CenterContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PanelContainer/CenterContainer/VBoxContainer/LoadLastCheckpoint" to="." method="_on_load_last_checkpoint_pressed"]
+[connection signal="pressed" from="PanelContainer/CenterContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
