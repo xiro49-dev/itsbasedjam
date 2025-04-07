@@ -5,8 +5,7 @@ var current_stage = 0
 @export var grow_rate = 2.5
 @export var progress = 0
 @export var max_scale:Vector3 = Vector3.ONE
-@export var drop: Item
-@export var item_trigger: PackedScene
+@export var drop: PackedScene
 func _ready() -> void:
 	$Body.add_child(stages[current_stage].instantiate())
 	
@@ -30,9 +29,8 @@ func upgrade():
 		$Body.add_child(stages[current_stage].instantiate())
 	else:
 		grow_rate = 0
-		var _drop = item_trigger.instantiate()
+		var _drop = drop.instantiate()
 		get_tree().get_first_node_in_group("Level").add_child(_drop)
 		_drop.global_position = self.global_position
-		_drop.resource = drop
-		_drop.add_child(CSGBox3D.new())
+		_drop.get_node("Body").add_child(stages[-1].instantiate())
 		self.queue_free()

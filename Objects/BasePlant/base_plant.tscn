@@ -1,19 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://dqpxfiud84k3y"]
+[gd_scene load_steps=6 format=3 uid="uid://dqpxfiud84k3y"]
 
 [ext_resource type="Script" uid="uid://cskiaq1mmabfy" path="res://Objects/BasePlant/base_plant.gd" id="1_l8lqb"]
 [ext_resource type="PackedScene" uid="uid://do14qmxd1wgui" path="res://Objects/BasePlant/stage1.tscn" id="2_f8kdk"]
 [ext_resource type="PackedScene" uid="uid://voyg8d32f3dw" path="res://Objects/BasePlant/stage0.tscn" id="2_whuxo"]
 [ext_resource type="PackedScene" uid="uid://h0n7gxvejhhg" path="res://Objects/BasePlant/stage2.tscn" id="3_whuxo"]
-[ext_resource type="Resource" uid="uid://br62lqkmeudw1" path="res://new_scripts&&scenes/items/item_1.tres" id="5_ikc4d"]
-[ext_resource type="PackedScene" uid="uid://lvpi2mwnllsi" path="res://new_scripts&&scenes/items/item_trigger.tscn" id="6_ikc4d"]
+[ext_resource type="PackedScene" uid="uid://dlj281ob37j3t" path="res://Objects/base_plant_pickup.tscn" id="5_w2t0q"]
 
 [node name="BasePlant" type="Area3D"]
 script = ExtResource("1_l8lqb")
 stages = Array[PackedScene]([ExtResource("2_whuxo"), ExtResource("2_f8kdk"), ExtResource("3_whuxo")])
 grow_rate = 80.0
 max_scale = Vector3(3, 3, 3)
-drop = ExtResource("5_ikc4d")
-item_trigger = ExtResource("6_ikc4d")
+drop = ExtResource("5_w2t0q")
 
 [node name="Body" type="Marker3D" parent="."]
 

@@ -3,6 +3,7 @@ extends CharacterBody3D
  
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var ground_acceleration: float = 8.0
+@export var drone: PackedScene
 @export_category("Movement")
 @export var jump_height: float = 2.0
 @export var walk_speed = 8.0
@@ -10,12 +11,14 @@ var ground_acceleration: float = 8.0
 @export var air_acceleration: float = 5.0
 @export var ground_friction: float = 30
 @export var air_friction: float = 2.0
+var current_gravity_direction = Vector3.DOWN
 @export_category("Camera")
 @export_enum("t", "f") var camera_mode = "t"
 @export var third_p_arm_position:Vector3 = Vector3(0.0, 3.0, 0.0) 
 @export var third_p_arm_length: float = -3
 @export var first_p_arm_position:Vector3 = Vector3(0.0, 2.0, 0.0) #adjust to player height
 @export var first_p_arm_length: float = 0
+@export_category("animation")
 #region new_variables
 signal died
 @onready var item_picker: Area3D = $Item_picker
@@ -70,14 +73,13 @@ func _process(delta: float) -> void:
 	else:
 		blend_amount = move_toward(blend_amount, 0.99, delta * blend_speed)
 	animation_tree.set("parameters/Hit/BlendTree/Blend2/blend_amount", blend_amount)
- 
+
 func _physics_process(delta: float) -> void:
 	if can_move == false:
 		return
-	# Apply gravity
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-
+		
 	var direction: Vector3 = Vector3.ZERO
 	direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	direction.z = Input.get_action_strength("down") - Input.get_action_strength("up")
@@ -101,7 +103,6 @@ func _physics_process(delta: float) -> void:
 		if is_on_floor():
 			velocity.x = lerp(velocity.x, 0.0, ground_friction * delta)
 			velocity.z = lerp(velocity.z, 0.0, ground_friction * delta)
-
 		else:
 			velocity.x = lerp(velocity.x, 0.0, air_friction * delta)
 			velocity.z = lerp(velocity.z, 0.0, air_friction * delta)
@@ -115,7 +116,7 @@ func _physics_process(delta: float) -> void:
 	if velocity.length_squared() > 0 and not global_position.is_equal_approx(global_position + Vector3(velocity.x, 0, -velocity.z).normalized()):
 		var target_rotation:Transform3D = transform.looking_at(global_position + Vector3(velocity.x, 0, -velocity.z).normalized(), Vector3.UP)
 		get_node("Body").rotation.y = -target_rotation.basis.get_euler().y
- 
+
 func is_player():
 	return true
 
@@ -161,6 +162,7 @@ func on_jumping_timer_timeout() -> void:
 #endregion 
 
 func _unhandled_input(event: InputEvent) -> void:
+	
 	if event.is_action_pressed("jump"):
 		if is_jumping == false and is_on_floor():
 			is_jumping = true
@@ -204,6 +206,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 	elif event.is_action_pressed("toggle_camera"):
 		toggle_camera()
+	elif event.is_action_pressed("enter_drone") and get_tree().get_first_node_in_group("Drone") == null:
+		activate_drone()
 		
 func take_damage(amount: int, direction : Vector3 = Vector3.ZERO) -> void:
 	if is_dodging:
@@ -227,16 +231,36 @@ func take_damage(amount: int, direction : Vector3 = Vector3.ZERO) -> void:
  
 func toggle_camera():
 	if camera_mode == "t":
-		$CameraPivot.position = first_p_arm_position
-		$CameraPivot/SpringArm3D.spring_length = first_p_arm_length
+		$CameraPivotPivot/CameraPivot.position = first_p_arm_position
+		$CameraPivotPivot/CameraPivot/SpringArm3D.spring_length = first_p_arm_length
 		$Body.visible = false
 		camera_mode = "f"
 	else:
-		$CameraPivot.position = third_p_arm_position
-		$CameraPivot/SpringArm3D.spring_length = third_p_arm_length
+		$CameraPivotPivot/CameraPivot.position = third_p_arm_position
+		$CameraPivotPivot/CameraPivot/SpringArm3D.spring_length = third_p_arm_length
 		$Body.visible = true
 		camera_mode = "t"
-
+		
+func activate_drone():
+	var _drone = drone.instantiate()
+	get_parent().add_child(_drone)
+	_drone.global_position = self.global_position + Vector3(0.0, 10, 0.0)
+	_drone.activate()
+	deactivate()
+	
+func activate():
+	add_to_group("Player")
+	remove_from_group("PlayerDeactive")
+	can_move = true
+	$CameraPivotPivot/CameraPivot/SpringArm3D/Camera3D.current = true
+	get_tree().get_first_node_in_group("Drone").queue_free()
+	
+	
+func deactivate():
+	remove_from_group("Player")
+	add_to_group("PlayerDeactive")
+	can_move = false
+	
 func test_dialog() -> void:
 	await get_tree().create_timer(5).timeout
 	var choice : int = await $/root/Game.dialog.display_options("This is to test dialog system",

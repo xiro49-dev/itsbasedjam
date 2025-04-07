@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://ca0fk0x1n2k83"]
+[gd_scene load_steps=21 format=3 uid="uid://ca0fk0x1n2k83"]
 
 [ext_resource type="Script" uid="uid://ct8wm256wp28x" path="res://Levels/level.gd" id="1_a4bbc"]
 [ext_resource type="Texture2D" uid="uid://mj5lqv6dnxrw" path="res://Assets/Textures/kenney_prototype-textures/Vector/texture_02.svg" id="2_1w7ek"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://lvpi2mwnllsi" path="res://new_scripts&&scenes/items/item_trigger.tscn" id="8_b2taf"]
 [ext_resource type="Resource" uid="uid://6g0qw0lmh3jq" path="res://new_scripts&&scenes/items/item_2.tres" id="9_vctyh"]
 [ext_resource type="PackedScene" uid="uid://dqpxfiud84k3y" path="res://Objects/BasePlant/base_plant.tscn" id="10_06isw"]
-[ext_resource type="PackedScene" uid="uid://c2xef6nq23ufq" path="res://Assets/plants/Fbx/Desert_plant_004.fbx" id="11_sderq"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_koob3"]
 vertices = PackedVector3Array(-49.6986, 50.5, -49.5, -49.6986, 50.5, 49.5, -48.9486, 50.5, 49.5, -48.9486, 50.5, -49.5, 48.8014, 50.5, -49.5, 48.8014, 50.5, 49.5, 49.3014, 50.5, 49.5, 49.3014, 50.5, -49.5, -47.9486, 1, -13, -15.1986, 1, -12.75, -13.1986, 1, -13, -13.4486, 1, -48.75, -47.9486, 1, -48.75, -6.94858, 1, -13.25, -6.94858, 1, -48.75, -6.44858, 1, -13, 47.8014, 1, -11.75, 47.8014, 1, -48.75, -6.44858, 1, -11.5, -15.4486, 1, -6.5, -15.1986, 1, -10.5, -15.6986, 1, -10.75, -47.9486, 1, -6.5, -15.6986, 1, -12.5, -6.19858, 1, -7, 47.8014, 1, -7, -6.44858, 1, -6.5, -8.69858, 1, -6.25, -8.44858, 1, 49, 47.8014, 1, 49, -14.9486, 1, -6, -47.9486, 1, 49, -14.9486, 1, 49)
@@ -107,7 +106,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -30.6961)
 
 [node name="LevelPortal" parent="." instance=ExtResource("5_ethlp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 26.4149)
-target_level = "test_level_2"
+target_level = "test_level_3"
+
+[node name="BasePlant" parent="." instance=ExtResource("10_06isw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.1296, 1.34091, 0)
 
 [node name="items_pickup" type="Node" parent="."]
 
@@ -124,11 +126,6 @@ resource = ExtResource("9_vctyh")
 
 [node name="CSGTorus3D" type="CSGTorus3D" parent="items_pickup/item_trigger2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.146692, -1.89592, -0.434119)
-
-[node name="BasePlant" parent="." instance=ExtResource("10_06isw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.34091, 0)
-
-[node name="Desert_plant_004" parent="." instance=ExtResource("11_sderq")]
 
 [editable path="items_pickup/item_trigger"]
 [editable path="items_pickup/item_trigger2"]
