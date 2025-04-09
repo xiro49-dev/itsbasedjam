@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://b2or0d1dqyw0l"]
+[gd_scene load_steps=13 format=3 uid="uid://b2or0d1dqyw0l"]
 
 [ext_resource type="Script" uid="uid://dcxlf2cd5k5q6" path="res://Actors/Player/player.gd" id="1_5ni5v"]
 [ext_resource type="Script" uid="uid://crwpsb4svk5eq" path="res://Actors/Player/camara_arm.gd" id="1_vhr1b"]
 [ext_resource type="PackedScene" uid="uid://cjq4pg7u5slxx" path="res://Actors/DronePlayer/DronePlayer.tscn" id="2_pnakb"]
 [ext_resource type="PackedScene" uid="uid://co47sqq6q74rq" path="res://Assets/male_base.tscn" id="3_8gtf5"]
+[ext_resource type="PackedScene" uid="uid://hbxyk6jt6ubx" path="res://Actors/Player/bullet.tscn" id="3_g1lo4"]
 [ext_resource type="Script" uid="uid://cyhxk36ccqils" path="res://new_scripts&&scenes/extra/pickup_items.gd" id="8_awv0x"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://bvw5kpbhwhwth" path="res://new_scripts&&scenes/animation_tree/Root.tres" id="18_rbp5l"]
 [ext_resource type="Texture2D" uid="uid://cdypd7c41iqwq" path="res://Assets/Player/Health bar outline.png" id="19_cwpch"]
@@ -20,6 +21,11 @@ radius = 2.0
 collision_layer = 4
 script = ExtResource("1_5ni5v")
 drone = ExtResource("2_pnakb")
+bullet = ExtResource("3_g1lo4")
+jump_height = 4.0
+air_acceleration = 5.31
+ground_friction = 10.0
+air_friction = 1.67
 
 [node name="CameraPivotPivot" type="Marker3D" parent="."]
 
@@ -36,6 +42,9 @@ transform = Transform3D(-0.999994, -0.00350844, -0.000541334, -0.00350847, 0.953
 current = true
 
 [node name="Body" type="Marker3D" parent="."]
+
+[node name="BulletSpawn" type="Marker3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.52982, 0.94481)
 
 [node name="MaleBase" parent="Body" instance=ExtResource("3_8gtf5")]
 
@@ -180,6 +189,23 @@ anchor_top = 0.931
 anchor_right = 0.206
 anchor_bottom = 0.954
 offset_left = 0.567999
+offset_top = -26.288
+offset_right = 509.688
+offset_bottom = 8.80798
+grow_vertical = 0
+scale = Vector2(0.3, 0.3)
+value = 10.0
+texture_over = ExtResource("19_cwpch")
+texture_progress = ExtResource("20_slsra")
+script = ExtResource("21_slsra")
+
+[node name="SprintMeter" type="TextureProgressBar" parent="."]
+anchors_preset = -1
+anchor_left = 0.016
+anchor_top = 0.931
+anchor_right = 0.206
+anchor_bottom = 0.954
+offset_left = 0.567999
 offset_top = -0.288025
 offset_right = 509.688
 offset_bottom = 34.808
@@ -188,7 +214,6 @@ scale = Vector2(0.3, 0.3)
 value = 10.0
 texture_over = ExtResource("19_cwpch")
 texture_progress = ExtResource("20_slsra")
-script = ExtResource("21_slsra")
 
 [node name="Timers" type="Node" parent="."]
 

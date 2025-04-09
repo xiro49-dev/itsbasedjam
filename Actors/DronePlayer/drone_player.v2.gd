@@ -40,7 +40,13 @@ func _physics_process(delta):
 
 	move_and_slide()
 	rotate_body(input_direction, delta)
-	
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("unlock_mouse"):
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 func _process(delta):
 		
 	if Input.is_action_just_pressed("click") and held_object != null:
@@ -57,7 +63,7 @@ func _process(delta):
 		deactivate()
 		
 	
-	if Input.is_action_just_pressed("click") and beam_ray.is_colliding():
+	if beam_ray.is_colliding():
 		var collision = beam_ray.get_collider()
 		if collision is RigidBody3D and not remote.remote_path and collision != held_object:
 			pickup(collision)

@@ -57,6 +57,7 @@ _data = {
 }
 
 [node name="FadeUi" type="CanvasLayer"]
+visible = false
 script = ExtResource("1_8qhk2")
 
 [node name="ColorRect" type="ColorRect" parent="."]

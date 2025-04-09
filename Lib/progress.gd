@@ -1,7 +1,7 @@
 extends Resource
 class_name Progress
 
-@export var level_posistion: Vector3 = Vector3(0, 2.0, 0)
+@export var level_posistion: Vector3 = Vector3(0, 2.5, 0)
 @export var level_name: String = "Test_Level"
  
 @export var coins : int:

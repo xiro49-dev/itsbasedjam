@@ -4,6 +4,7 @@ extends CharacterBody3D
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var ground_acceleration: float = 8.0
 @export var drone: PackedScene
+@export var bullet: PackedScene
 @export_category("Movement")
 @export var jump_height: float = 2.0
 @export var walk_speed = 8.0
@@ -18,7 +19,10 @@ var current_gravity_direction = Vector3.DOWN
 @export var third_p_arm_length: float = -3
 @export var first_p_arm_position:Vector3 = Vector3(0.0, 2.0, 0.0) #adjust to player height
 @export var first_p_arm_length: float = 0
-@export_category("animation")
+@onready var sprint_meter: TextureProgressBar = $SprintMeter
+@export var max_sprint = 100
+@onready var current_sprint = max_sprint
+@export var sprint_decay = 2.5
 #region new_variables
 signal died
 @onready var item_picker: Area3D = $Item_picker
@@ -52,6 +56,7 @@ var _direction := Vector3.ZERO
 @export var is_dodging: bool
 @export var is_attacking: bool
 @export var interrupted: bool
+
 #endregion
  
 func _ready() -> void:
@@ -73,6 +78,15 @@ func _process(delta: float) -> void:
 	else:
 		blend_amount = move_toward(blend_amount, 0.99, delta * blend_speed)
 	animation_tree.set("parameters/Hit/BlendTree/Blend2/blend_amount", blend_amount)
+func get_direction():
+	var direction: Vector3 = Vector3.ZERO
+	direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
+	direction.z = Input.get_action_strength("down") - Input.get_action_strength("up")
+	direction = direction.normalized()
+	var camera:Camera3D = get_viewport().get_camera_3d()
+	direction = (camera.global_transform.basis * transform.basis * direction).normalized()
+	direction.y = 0
+	return direction
 
 func _physics_process(delta: float) -> void:
 	if can_move == false:
@@ -80,17 +94,14 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 		
-	var direction: Vector3 = Vector3.ZERO
-	direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
-	direction.z = Input.get_action_strength("down") - Input.get_action_strength("up")
-	direction = direction.normalized()
-	var camera:Camera3D = get_viewport().get_camera_3d()
-	direction = (camera.global_transform.basis * transform.basis * direction).normalized()
+	var direction = get_direction()
 	if direction:
-		var target_velocity: Vector3 = direction * ground_acceleration  # Adjust speed as needed
+		var target_velocity: Vector3 = direction.normalized() * ground_acceleration  # Adjust speed as needed
 		target_velocity.y = velocity.y
 		if is_on_floor():
-			if Input.is_action_pressed("run"):
+			if Input.is_action_pressed("run") and current_sprint > 0:
+				current_sprint = current_sprint - sprint_decay * delta
+				sprint_meter.value = current_sprint
 				ground_acceleration = run_speed
 			else:
 				ground_acceleration = walk_speed
@@ -101,9 +112,12 @@ func _physics_process(delta: float) -> void:
 			velocity.z = lerp(velocity.z, target_velocity.z, air_acceleration * delta)
 	else:
 		if is_on_floor():
+			current_sprint = current_sprint + sprint_decay * delta
+			sprint_meter.value = current_sprint
 			velocity.x = lerp(velocity.x, 0.0, ground_friction * delta)
 			velocity.z = lerp(velocity.z, 0.0, ground_friction * delta)
 		else:
+			
 			velocity.x = lerp(velocity.x, 0.0, air_friction * delta)
 			velocity.z = lerp(velocity.z, 0.0, air_friction * delta)
 			
@@ -116,6 +130,8 @@ func _physics_process(delta: float) -> void:
 	if velocity.length_squared() > 0 and not global_position.is_equal_approx(global_position + Vector3(velocity.x, 0, -velocity.z).normalized()):
 		var target_rotation:Transform3D = transform.looking_at(global_position + Vector3(velocity.x, 0, -velocity.z).normalized(), Vector3.UP)
 		get_node("Body").rotation.y = -target_rotation.basis.get_euler().y
+	if Input.is_action_just_pressed("click"):
+		fire()
 
 func is_player():
 	return true
@@ -186,7 +202,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 	elif event.is_action_pressed("click") and is_attacking == false and action_state.get_current_node() == "A_aim" :
 		is_attacking = true
+		fire()
 		action_state.travel("A_shoot")
+		
 		attacking_timer.start
  
 	elif event.is_action_pressed("reload"):
@@ -295,3 +313,9 @@ func doff(socket: int) -> void:
 	if equip_sockets[socket].get_child_count() > 0:
 		equip_sockets[socket].get_child(0).queue_free()
  
+func fire():
+	var cam = get_viewport().get_camera_3d()
+	var _b = bullet.instantiate() 
+	get_parent().add_child(_b)
+	
+	print("fire")

@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://hbxyk6jt6ubx"]
+
+[ext_resource type="Script" uid="uid://dqpfu2a6ktjfy" path="res://Actors/Player/bullet.gd" id="1_v50qi"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0lv7s"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_v50qi"]
+radius = 0.1
+
+[node name="Bullet" type="RigidBody3D"]
+collision_layer = 8
+gravity_scale = 0.0
+script = ExtResource("1_v50qi")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+radius = 0.1
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_0lv7s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_v50qi")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

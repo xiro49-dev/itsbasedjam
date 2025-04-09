@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bhkh4jli8stek"]
+[gd_scene load_steps=12 format=3 uid="uid://bhkh4jli8stek"]
 
 [ext_resource type="Script" uid="uid://cl1ng4ua7y0us" path="res://game.gd" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://b2or0d1dqyw0l" path="res://Actors/Player/player.tscn" id="3_feb5d"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://hu4co2276cpo" path="res://new_scripts&&scenes/extra/wallet.gd" id="7_j5wjh"]
 [ext_resource type="Texture2D" uid="uid://uicwxeert8w3" path="res://new_scripts&&scenes/items/coin.PNG" id="8_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://dfm53ed3e7jty" path="res://UI/PauseMenu/pause_menu.tscn" id="8_vef74"]
+[ext_resource type="Script" uid="uid://dw13th52quoha" path="res://UI/LoadingScreen/loading_screen.gd" id="9_vef74"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_7jktm"]
 device = -1
@@ -17,12 +18,13 @@ unicode = 32
 [sub_resource type="Shortcut" id="Shortcut_ryrav"]
 events = [SubResource("InputEventKey_7jktm")]
 
-[node name="Game" type="Node3D"]
+[node name="Game" type="Node3D" groups=["Game"]]
 script = ExtResource("1_fc0e3")
 player_scenes = Dictionary[int, PackedScene]({
 0: ExtResource("3_feb5d"),
 1: ExtResource("5_vef74")
 })
+should_spawn_enemeies = true
 should_spawn_player = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -128,6 +130,34 @@ one_shot = true
 
 [node name="PauseMenu" parent="UI" instance=ExtResource("8_vef74")]
 process_mode = 3
+
+[node name="LoadingScreen" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_vef74")
+
+[node name="ColorRect" type="ColorRect" parent="UI/LoadingScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/LoadingScreen/ColorRect"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [connection signal="pressed" from="UI/Dialog/Panel/VBoxContainer/options/option 1" to="UI/Dialog" method="on_option_pressed" binds= [0]]
 [connection signal="pressed" from="UI/Dialog/Panel/VBoxContainer/options/option 2" to="UI/Dialog" method="on_option_pressed" binds= [1]]

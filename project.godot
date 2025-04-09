@@ -35,6 +35,7 @@ Level=""
 Drone=""
 PlayerDeactive=""
 Planet=""
+Game=""
 
 [input]
 
@@ -164,4 +165,4 @@ exit_drone={
 
 [physics]
 
-3d/default_gravity=19.6
+3d/default_gravity=5.798

@@ -68,15 +68,16 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= ProjectSettings.get_setting("physics/3d/default_gravity") * delta * 20
 	var player = get_tree().get_first_node_in_group("Player")
+	
 	if handle_wait(delta):
 		return
-	if player and global_position.distance_to(player.global_position) <= attack_range and can_attack:
-		attack(delta)
+	if not player:
+		return
 	match type:
 		Enums.EnemyTypes.Random:
-			random_walker(delta)
+			random_walker(delta, player)
 		Enums.EnemyTypes.Chase:
-			chase(delta, get_tree().get_first_node_in_group("Player"))
+			chase(delta, player)
 	animation_tree.set("parameters/Hit/BlendTree/Locomotion/movement/blend_position", velocity.length() / speed * 2) 
 	handle_filters(velocity != Vector3.ZERO)
 	 
@@ -92,16 +93,23 @@ func pick_random_point():
 		target_point = NavigationServer3D.map_get_random_point(nav_agent.get_navigation_map(), 1, false)
 		nav_agent.set_target_position(target_point)
 
-func random_walker(delta:float):
+func random_walker(delta:float, player: Node3D):
+	if not player:
+		return
 	if not target_point:
 		pick_random_point()
-
+	if player and global_position.distance_to(player.global_position) <= attack_range and can_attack:
+		attack(delta)
 	var next_nav_point = nav_agent.get_next_path_position()
 	velocity = (next_nav_point - global_transform.origin).normalized() * speed
 	rotation.y = lerp_angle(rotation.y, atan2(-velocity.x, -velocity.z), delta * ProjectSettings.get_setting("physics/3d/default_gravity"))
 	move_and_slide()
 	
 func chase(delta:float, player: Node3D):
+	if not player:
+		return
+	if player and global_position.distance_to(player.global_position) <= attack_range and can_attack:
+		attack(delta)
 	nav_agent.set_target_position(player.global_position)
 	var avoidance_vector = calculate_avoidance()
 	var next_nav_point = nav_agent.get_next_path_position()
